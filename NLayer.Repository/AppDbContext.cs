@@ -54,6 +54,8 @@ namespace NLayer.Repository
             base.OnModelCreating(modelBuilder);
 
         }
+
+       
     }
    
     
