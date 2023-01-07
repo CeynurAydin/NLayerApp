@@ -21,8 +21,36 @@ namespace NLayer.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             //modelBuilder.ApplyConfiguration(new ProductConfugation()); tek başına biri configure edilmek istenildiğinde bu şekilde yazılabilir.
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+           
+            //seeddata mızı AppDbcontext içinde bu şekilde de tanımlayabiliriz. 
+            modelBuilder.Entity<ProductFeature>().HasData(
+                new ProductFeature
+                {   
+                    Id=1,
+                    ProductId=1,
+                    Color="Mavi",
+                    Height=100,
+                    Width=200
+                },
+                new ProductFeature
+                {
+                    Id = 2,
+                    ProductId = 2,
+                    Color = "Kırmızı",
+                    Height = 200,
+                    Width = 200
+                },
+                 new ProductFeature
+                 {
+                     Id = 3,
+                     ProductId = 3,
+                     Color = "Yeşil",
+                     Height = 300,
+                     Width = 300
+                 } );
+            
             base.OnModelCreating(modelBuilder);
 
         }
