@@ -18,10 +18,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
-builder.Services.AddDbContext<AppDbContext>(
-x=>x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConn"),
-// AppDbContext hangi katmanda ise o assemblyi bulur.
-options=>options.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name)));
+builder.Services.AddDbContext<AppDbContext>(x =>
+{
+    x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConn"), options =>
+    {
+        // AppDbContext hangi katmanda ise o assemblyi bulur.
+        options.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
+    });
+
+});
+
 
 var app = builder.Build();
 
